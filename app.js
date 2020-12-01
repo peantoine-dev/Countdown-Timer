@@ -1,11 +1,13 @@
 // DOM
+const txtBox = document.querySelector('.txt');
+const timeBox = document.querySelector('.time');
 const daysBox = document.getElementById('days');
 const hoursBox = document.getElementById('hours');
 const minutesBox = document.getElementById('minutes');
 const secondsBox = document.getElementById('seconds');
 
-// Fonction qui affiche le temps restant jusqu'à endDate
-let getRemainingTime = () => {
+// Fonction qui affiche le temps restant jusqu'à endDate qu'on lance à intervalles réguliers
+let getRemainingTime = setInterval(() => {
   // Date de fin
   let endDate = new Date('1 January 2021 00:00:00');
   // Date actuelle
@@ -24,7 +26,12 @@ let getRemainingTime = () => {
   hoursBox.innerText = `Hours: ${hours}`;
   minutesBox.innerText = `Minutes: ${minutes}`;
   secondsBox.innerText = `Seconds: ${seconds}`;
-}
 
-// Fonction qui lance getRemainingTime() à intervalles réguliers
-setInterval(getRemainingTime, 100);
+  // Si le compte à rebours est inférieur ou égal à 0...
+  if (timeRemaining <= 0) {
+    clearInterval(getRemainingTime);
+    txtBox.innerText = 'Happy New Year 2021 !';
+    timeBox.style.display = 'none';
+  }
+  
+}, 100);
